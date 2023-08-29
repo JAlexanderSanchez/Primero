@@ -25,5 +25,8 @@ def process_inference(user_prompt) -> str:
             {"role": "user", "content": user_prompt}
         ]
     )
+
     response = completion.choices[0].message.content
-    return response
+    total_tokens: completion[0].usage.total_tokens
+
+    return [response, total_tokens]

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 
 from uce.ai.openuce import Document, process_inference
 
@@ -8,11 +9,9 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
-
 
 @app.post("/inference")
 def inference(doc: Document):
@@ -22,4 +21,4 @@ def inference(doc: Document):
     }
 
 if __name__ == "__main__":
-    app.run()
+    uvicorn.run(app, host='localhost', port='2588')
